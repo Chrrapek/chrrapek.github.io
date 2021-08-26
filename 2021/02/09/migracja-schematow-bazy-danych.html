@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="pl">
+<script src="/js/lunr.min.js"></script><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Migracja schematów bazy danych | Consdata - blog techniczny</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Migracja schematów bazy danych" />
+<meta name="author" content="jgoszczurny" />
+<meta property="og:locale" content="pl" />
+<meta name="description" content="Niemożliwe jest rozwijanie aplikacji bez równoczesnego rozwijania schematu bazy danych." />
+<meta property="og:description" content="Niemożliwe jest rozwijanie aplikacji bez równoczesnego rozwijania schematu bazy danych." />
+<link rel="canonical" href="https://chrrapek.github.io/2021/02/09/migracja-schematow-bazy-danych.html" />
+<meta property="og:url" content="https://chrrapek.github.io/2021/02/09/migracja-schematow-bazy-danych.html" />
+<meta property="og:site_name" content="Consdata - blog techniczny" />
+<meta property="og:image" content="https://chrrapek.github.io/assets/img/posts/2021-02-09-migracja-schematow-bazy-danych/bird-migrations.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-02-09T01:00:00-06:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://chrrapek.github.io/assets/img/posts/2021-02-09-migracja-schematow-bazy-danych/bird-migrations.jpg" />
+<meta property="twitter:title" content="Migracja schematów bazy danych" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"jgoszczurny"},"@type":"BlogPosting","description":"Niemożliwe jest rozwijanie aplikacji bez równoczesnego rozwijania schematu bazy danych.","url":"https://chrrapek.github.io/2021/02/09/migracja-schematow-bazy-danych.html","image":"https://chrrapek.github.io/assets/img/posts/2021-02-09-migracja-schematow-bazy-danych/bird-migrations.jpg","headline":"Migracja schematów bazy danych","dateModified":"2021-02-09T01:00:00-06:00","datePublished":"2021-02-09T01:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://chrrapek.github.io/2021/02/09/migracja-schematow-bazy-danych.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link href="https://fonts.googleapis.com/css?family=Raleway:400,700,600,500,300,200,100,800,900" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,600,500,300,200,100,800,900"" rel="stylesheet" type="text/css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" crossorigin="anonymous">
+  <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://chrrapek.github.io/feed.xml" title="Consdata - blog techniczny" />
+
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+<body>---
+---
+<nav class="site-header">
+    <div class="container">
+        <div class="header navbar-default" role="navigation">
+            <div class="header-brand">
+                <div class="nav navbar-nav">
+                    <div class="nav-link"><a href="/">BLOG.CONSDATA.TECH</a></div>
+                </div>
+
+                <div class="mobile-search">
+                    
+<form action="/search.html" method="get">
+
+    <div class="search-input-container">
+        <input type="text" placeholder="Szukaj..." id="search-box-mobile" name="query" class="search-input" autocomplete="off">
+        <i class="fa fa-search search-icon" onclick="expandInputMobile()"></i>
+    </div>
+</form>
+
+<script>
+    const inputMobile = document.getElementById("search-box-mobile");
+    const logo = document.getElementById("header-logo");
+    const expandInputMobile = () => {
+        inputMobile.classList.toggle("expanded");
+        logo.classList.toggle("header-logo");
+        logo.classList.toggle("logo-invisible");
+    };
+</script>
+
+                </div>
+            </div>
+            <div id="header-links" class="mobile-nav">
+                <a class="header-logo" href="https://consdata.com/pl">
+                    <img src="/assets/img/logo-nowe.png" alt="consdata.com">
+                </a>
+                <div class="feed-subscribe">
+                    <a href="/feed.xml">
+                    <svg class="svg-icon">
+                        <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+                    </svg>
+                    </a>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+</nav>
+<script>
+    function navigate(baseUrl) {
+        console.log(baseUrl);
+        const queryParams = window.location.search;
+        window.location.href = baseUrl + queryParams;
+    }
+</script>
+<div class="navigation-bar">
+    <div class="row">
+        <div class="col-15 desktop-navbar">
+            <div class="col-2-3 navbar-links">
+                <div class="navigation-tags">
+                    
+                    
+                    
+                        <a href="/search.html?query="></a>
+                    
+                </div>
+                
+<form action="/search.html" method="get">
+
+    <div class="search-input-container">
+        <input type="text" placeholder="Szukaj..." id="search-box" name="query" class="search-input" autocomplete="off">
+        <i class="fa fa-search search-icon" onclick="expandInputDesktop()"></i>
+    </div>
+</form>
+
+<script>
+    const inputDesktop = document.getElementById("search-box");
+    const expandInputDesktop = () => {
+        inputDesktop.classList.toggle("expanded");
+    };
+</script>
+
+            </div>
+            <div class="col-1-3">
+                <a href="https://app2.salesmanago.pl/api/popup/e7yrrpjmxbm7bahc/Zapisz_sie_na_newsletter.htm" class="newsletter-link">
+                    <div class="newsletter-button">
+                        Zapisz się na newsletter techniczny
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-15 mobile-navbar">
+            <div class="navigation-tags">
+                
+                
+                
+                <a href="/search.html?query="></a>
+                
+            </div>
+            <a href="https://app2.salesmanago.pl/api/popup/e7yrrpjmxbm7bahc/Zapisz_sie_na_newsletter.htm" class="newsletter-link">
+                <div class="newsletter-button">Zapisz się na newsletter techniczny</div>
+            </a>
+        </div>
+    </div>
+</div>
+<main class="page-content" aria-label="Content">
+    
+
+
+<div class="blog">
+    <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+        <header>
+            <div class="row back-link-row">
+    <div class="col-15">
+        <a href="/" class="main-page-link-container">
+            <i class="fa fa-arrow-left"></i>
+                Wszystkie wpisy
+        </a>
+    </div>
+</div>
+
+            <div class="row">
+                <div class="col-15">
+                    <h1 class="post-big-title p-name" itemprop="name headline">Migracja schematów bazy danych</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-15">
+                    <div class="post-metadata">
+    <a href="/authors/jgoszczurny.html" class="author-name">
+        <img class="big-author-image" src="/assets/img/authors/jgoszczurny.jpg" alt="author">
+    </a>
+    <div class="post-info">
+        <a href="/authors/jgoszczurny.html" class="author-name-metadata">Jakub Goszczurny</a>
+        <span>
+9
+
+lutego
+
+
+
+2021
+</span>
+    </div>
+</div>
+
+                </div>
+                <div class="col-5">
+                    
+
+                </div>
+            </div>
+        </header>
+        <div itemprop="articleBody" class="post-content-container">
+            <div class="post-content-left-pane">
+                <div class="post-content">
+                    <div class=" post-highlight-image">
+                        <img src="/assets/img/posts/2021-02-09-migracja-schematow-bazy-danych/bird-migrations.jpg"
+                             alt="postimage"/>
+                    </div>
+                    <div class="social-media-sharing">
+                        <div id="share-bar">
+    <div class="share-buttons">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://chrrapek.github.io/2021/02/09/migracja-schematow-bazy-danych.html"
+           onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+           title="Podziel się na Facebooku">
+            <i class="fa fa-facebook-official share-button"></i>
+        </a>
+
+        <a href="https://twitter.com/intent/tweet?text=Migracja schematów bazy danych&url=https://chrrapek.github.io/2021/02/09/migracja-schematow-bazy-danych.html"
+           onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+           title="Podziel się na Twitterze">
+            <i class="fa fa-twitter share-button"> </i>
+        </a>
+
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://chrrapek.github.io/2021/02/09/migracja-schematow-bazy-danych.html&title=Migracja schematów bazy danych&source=Consdata - blog techniczny"
+           onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+           title="Podziel się na LinkedIn">
+            <i class="fa fa-linkedin share-button"></i>
+        </a>
+
+    </div>
+
+</div>
+
+                    </div>
+                    <div id="myModal" class="modal">
+                        <i id="modal-close" class="fa fa-times close" aria-hidden="true"
+                           onclick="closeModal()"></i>
+                        <img class="modal-content">
+                    </div>
+                    <p>Niemożliwe jest rozwijanie aplikacji bez równoczesnego rozwijania schematu bazy danych.</p>
+
+<p>Tak jak podczas rozwijania naszej aplikacji, stosujemy wzorce projektowe przy pisaniu kodu, tak w przypadku rozwijania schematów baz danych również powinniśmy stosować się do takich wytycznych, aby rozwijanie bazy danych było przyjemnością, a nie ostatecznością.</p>
+
+<h2 id="migracja-schematu-czyli-ewolucyjny-projekt-bazy-danych-ang-evolutionary-database-design">Migracja schematu, czyli ewolucyjny projekt bazy danych (ang. Evolutionary Database Design)</h2>
+<p>Aby umożliwić proste rozwijanie naszej bazy danych, możemy skorzystać z przetestowanego już zbioru zaleceń <a href="https://www.martinfowler.com/articles/evodb.html">🔗¹</a> <a href="https://en.wikipedia.org/wiki/Evolutionary_database_design">🔗²</a>, dzięki którym zmiany będą mniej inwazyjne, a nawet bezprzerwowe (zero downtime deployment).</p>
+
+<h3 id="przechowywanie-zmian-w-repozytorium-kodów">Przechowywanie zmian w repozytorium kodów</h3>
+<p>Podobnie jak kod aplikacji, schemat bazy danych jest częścią tworzonego systemu i dobrą praktyką jest przechowywanie go w repozytorium. 
+Jako że zmiany schematu bazy danych są przyrostowe, to repozytorium powinno zawierać wszystkie zmiany umożliwiające odtworzenie zawsze tej samej bazy danych.
+Dzięki temu uzyskamy szereg korzyści:</p>
+<ul>
+  <li>możliwość zweryfikowania zmian,</li>
+  <li>prostsze utrzymywanie kolejności zmian schematu bazy danych, dzięki utrzymywaniu zmian w jednym miejscu,</li>
+  <li>bezproblemowe odtworzenie zawsze dokładnie takiej samej bazy danych (np. lokalnie do celów testowych).</li>
+</ul>
+
+<p>Jeśli kilka projektów korzysta z bazy, to mimo wszystko zmiany powinny odbywać się tylko na jednym głównym repozytorium (nawet na osobnym).</p>
+
+<h3 id="każda-zmiana-schematu-powinna-być-migracją">Każda zmiana schematu powinna być migracją</h3>
+<p>Każdorazowe modyfikowanie schematu, powinno odbywać się za pomocą migracji, którą zapiszemy w repozytorium, unikając ręcznego modyfikowania schematu.</p>
+
+<p>Dzięki temu nie będzie sytuacji, w której po odtworzeniu bazy, będzie się ona różnić od oryginału.</p>
+
+<p>Dodatkowo zmiany wykonane ręcznie (z pominięciem migracji), mogą wpłynąć na jego późniejsze wykonanie za pomocą migracji, np. gdy wykonujemy CREATE TABLE bezpośrednio na bazie, a później dodajemy migrację schematu, która to procesuje, to w takim wypadku otrzymamy błąd informujący o tym, że taka tabela już istnieje.</p>
+
+<h3 id="wersjonowanie-rosnące-każdej-zmiany">Wersjonowanie (rosnące) każdej zmiany</h3>
+<ul>
+  <li>Każda zmiana powinna być wersjonowana, np. w osobnych plikach, w których zachowanie kolejności będzie wykonane za pomocą podbijania licznika lub dodania znacznika czasu do nazwy pliku.
+Jest to bardzo ważne, ponieważ inna kolejność uruchomienia migracji schematów bazy danych może całkowicie zmienić jej sens albo nawet całkowicie ją uniemożliwić.</li>
+  <li>Zalecane jest, aby każda zmiana była jak najmniejsza i najlepiej możliwa do odwrócenia. 
+Przykładowo tworząc indeksy na istniejących tabelach, najlepiej rozbić ich tworzenie do osobnych wersji.
+Jeśli nie zostaną one wykonane w osobnych migracjach schematu, wtedy narażamy się na ryzyko takie jak opisane niżej:
+    <ul>
+      <li>w tej samej migracji schematu bazy danych tworzymy indeks A oraz indeks B,</li>
+      <li>stworzenie indeksu A zajmuje 5 minut i przebiega poprawnie,</li>
+      <li>stworzenie indeksu B zajmuje ponad 5 minut i powoduje błąd TimeoutException,</li>
+      <li>oba indeksy zostają wycofane i indeks A musi być ponownie założony,</li>
+      <li>w przypadku, gdyby tworzenie indeksów było rozdzielone na osobne migracje, wtedy nie będzie konieczności ponownego tworzenia indeksu A (i ponownego poświęcania 5 minut na ten cel).</li>
+    </ul>
+  </li>
+  <li>Wykonywane zmiany powinny być przyrostowe, czyli zmiana dla danej wersji powinna być uruchomiona tylko raz.</li>
+</ul>
+
+<h4 id="przykładowe-biblioteki">Przykładowe biblioteki</h4>
+<ul>
+  <li>SQL
+    <ul>
+      <li>Liquibase
+        <ul>
+          <li><a href="https://www.liquibase.org/">liquibase.org</a></li>
+        </ul>
+      </li>
+      <li>FlywayDB
+        <ul>
+          <li><a href="https://flywaydb.org/">flywaydb.org</a></li>
+        </ul>
+      </li>
+      <li>MyBatis Migration
+        <ul>
+          <li><a href="https://mybatis.org/migrations">mybatis.org/migrations</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>NoSQL
+    <ul>
+      <li>Mongock
+        <ul>
+          <li><a href="https://github.com/cloudyrock/mongock">github.com/cloudyrock/mongock</a></li>
+          <li><a href="https://www.mongock.io">mongock.io</a></li>
+        </ul>
+      </li>
+      <li>Migrate-mongo
+        <ul>
+          <li><a href="https://www.npmjs.com/package/migrate-mongo">npmjs.com/package/migrate-mongo</a></li>
+          <li><a href="https://github.com/seppevs/migrate-mongo">github.com/seppevs/migrate-mongo</a></li>
+        </ul>
+      </li>
+      <li>liquibase-mongodb
+        <ul>
+          <li><a href="https://github.com/liquibase/liquibase-mongodb">github.com/liquibase/liquibase-mongodb</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>w powyższych bibliotekach tworzenie i uruchamianie przyrostowe zmian jest wbudowane.</p>
+
+<h3 id="zmiany-powinny-być-kompatybilne-wstecz">Zmiany powinny być kompatybilne wstecz</h3>
+<p>Jest to szczególnie ważne, jeśli chcemy bezprzerwowo aktualizować naszą bazę danych, w takim wypadku aktualizacja bazy danych nie powinna spowodować, że starsza wersja aplikacji przestanie działać.</p>
+
+<p>Przykładowo nowa kolumna powinna mieć domyślną wartość lub przyjmować null-e.</p>
+
+<p>Zmiana nazwy kolumny lub jej usunięcie powinno być rozbite na kilka etapów, tak aby jej prawdziwe usunięcie było wykonane nie w docelowej wersji, tylko np. w następnej iteracji, gdy będziemy pewni, że żadna aplikacja z niej nie korzysta.</p>
+
+<h2 id="aplikowanie-zmian">Aplikowanie zmian</h2>
+<p>Aplikowanie zmian wykonanych w ramach ewolucyjnej bazy danych jest już zależne od konkretnego przypadku.</p>
+
+<p>Jeśli baza danych jest ściśle związana z jedną aplikacją, to możemy ją uruchamiać bezpośrednio z kodu <a href="https://andrewlock.net/deploying-asp-net-core-applications-to-kubernetes-part-7-running-database-migrations/#running-migrations-on-application-startup">🔗⁵</a> .</p>
+
+<p>W przypadku gdy aplikacja jest rozproszona i nie chcemy blokować wszystkich instancji aplikacji na czas migracji schematu lub gdy kilka różnych aplikacji korzysta z tej bazy danych, możemy uruchamiać migrację niezależnie od aplikacji.
+W tym przypadku mamy następujące możliwości:</p>
+<ul>
+  <li>Wykonywanie zmian uruchamianych za pomocą CI/CD (np. automatycznie po otrzymaniu nowej wersji).
+Na repozytorium wykonujemy merge z migracjami schematu bazy danych, Jenkins wykrywa zmianę na repozytorium i wykonuje ją na bazie wskazanej w konfiguracji.</li>
+  <li>Z wykorzystaniem mechanizmów dostarczonych przez platformę, na której będzie to uruchamiane. Przykładowo dla Kubernetesa możemy:
+    <ul>
+      <li>wykorzystać initContainers, celem odpalenia migracji schematu bazy danych przed uruchomieniem docelowego kontenera z aplikacją 
+(w takim wypadku każda replika uruchomi migrację schematu, a to mechanizm migracji musi zapewnić, że zmiany zostaną wykonane wszystkie na jednym kontenerze i do tego jednorazowo) <a href="https://andrewlock.net/deploying-asp-net-core-applications-to-kubernetes-part-7-running-database-migrations/#init-containers">🔗⁵</a> ,</li>
+      <li>wykorzystać do tego celu Joby, które jednorazowo uruchomią migrację (a w przypadku problemów, wykonają automatyczne ponowienie n-razy) <a href="https://cloud.google.com/solutions/addressing-continuous-delivery-challenges-in-a-kubernetes-world#related_kubernetes_concepts_2">🔗³</a> <a href="https://kubernetes.io/docs/concepts/workloads/controllers/job/">🔗⁴</a> <a href="https://andrewlock.net/deploying-asp-net-core-applications-to-kubernetes-part-7-running-database-migrations/#jobs">🔗⁵</a> ,</li>
+      <li>wykorzystać dwa powyższe mechanizmy <a href="https://andrewlock.net/deploying-asp-net-core-applications-to-kubernetes-part-7-running-database-migrations/#combining-jobs-and-init-containers-to-handle-migrations">🔗⁵</a>,
+uruchomić joba, aby wykonał migrację schematu bazy danych, oraz initContainers tak, aby poczekał na zakończenie migracji schematu
+(a jeśli wszystkie migracje schematu wymagane przez aplikację, są już zaaplikowane, to uruchomienie docelowego kontenera).</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="przykłady---kubernetes">Przykłady - Kubernetes</h3>
+<p>Przykładowe rozwiązanie łączące mechanizm initContainer oraz job-a, dla różnych bibliotek do migracji schematów bazy danych:</p>
+<ul>
+  <li><a href="https://github.com/Consdata/blog-database-migration-example/tree/master/liquibase" title="Example Liquibase migration in GitHub project consdata/blog-database-migration-example"><svg class="svg-icon" style="color: #586069"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> Liquibase</a></li>
+  <li><a href="https://github.com/Consdata/blog-database-migration-example/tree/master/flyway" title="Example Flyway migration in GitHub project in consdata/blog-database-migration-example"><svg class="svg-icon" style="color: #586069"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> FlywayDB</a></li>
+  <li><a href="https://github.com/Consdata/blog-database-migration-example/tree/master/mybatis-migration" title="Example MyBatis migration in GitHub project consdata/blog-database-migration-example"><svg class="svg-icon" style="color: #586069"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> MyBatis Migration</a></li>
+  <li><a href="https://github.com/Consdata/blog-database-migration-example/tree/master/migrate-mongo" title="Example Migrate-Mongo migration in GitHub project consdata/blog-database-migration-example"><svg class="svg-icon" style="color: #586069"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> Migrate-mongo</a></li>
+</ul>
+
+<h2 id="bibliografia">Bibliografia</h2>
+<ol>
+  <li><a href="https://www.martinfowler.com/articles/evodb.html">https://www.martinfowler.com/articles/evodb.html</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Evolutionary_database_design">https://en.wikipedia.org/wiki/Evolutionary_database_design</a></li>
+  <li><a href="https://cloud.google.com/solutions/addressing-continuous-delivery-challenges-in-a-kubernetes-world#related_kubernetes_concepts_2">https://cloud.google.com/solutions/addressing-continuous-delivery-challenges-in-a-kubernetes-world#related_kubernetes_concepts_2</a></li>
+  <li><a href="https://kubernetes.io/docs/concepts/workloads/controllers/job/">https://kubernetes.io/docs/concepts/workloads/controllers/job/</a></li>
+  <li><a href="https://andrewlock.net/deploying-asp-net-core-applications-to-kubernetes-part-7-running-database-migrations/">https://andrewlock.net/deploying-asp-net-core-applications-to-kubernetes-part-7-running-database-migrations/</a></li>
+</ol>
+
+                    
+                    
+                </div>
+            </div>
+            <div class="sidebar">
+                
+<div class="sidebar-container">
+    <div class="sidebar-title">
+        Najnowsze wpisy
+    </div>
+    <div class="sidebar-latest-posts-container">
+        <ul class="sidebar-posts"><li class="sidebar-post no-breaking-word">
+                <a href="/2021/08/20/stun-server.html" lang="pl">Czy wiesz, że WebRTC korzysta z serwera STUN, aby umożliwić połączenie P2P?</a>
+            </li><li class="sidebar-post no-breaking-word">
+                <a href="/2021/08/02/sredniki-w-js.html" lang="pl">Czy wiesz co się dzieje, kiedy nie stawiasz średników w JS?</a>
+            </li><li class="sidebar-post no-breaking-word">
+                <a href="/2021/07/16/zarzadzanie-dostepem-przy-uzyciu-access-control-list.html" lang="pl">Zarządzanie dostępem przy użyciu ACL (Access Control List)</a>
+            </li></ul>
+    </div>
+</div>
+
+                <div class="sidebar-container" id="recommended-posts-sidebar">
+    <div class="sidebar-title">
+        Podobne wpisy
+    </div>
+    <div class="sidebar-latest-posts-container">
+        <ul class="sidebar-posts" id="recommended-posts-desktop">
+
+        </ul>
+    </div>
+</div>
+
+                <!--                <div class="sidebar-container">
+    <div class="sidebar-title">
+        Ogłoszenia
+    </div>
+    <div class="ad-container">
+        <div class="ad-titile">
+            Dołącz do webinaru <br /> Consdata Tech #5
+        </div>
+        <div class="ad-red-text">
+            28.01.2021, czwartek, 18.00-19.30
+        </div>
+        <div class="ad-event-title">
+            Domain Driven Design <br /> w oparciu o Axon Framework
+        </div>
+        <div class="ad-icons-container">
+            <a class="ad-link-icon" href="https://www.meetup.com/pl-PL/Consdata/events/274821386/">
+                <i class="fa fa-meetup event-icon"></i>
+            </a>
+            <a class="ad-link-icon" href="https://www.facebook.com/events/140503697812590">
+                <i class="fa fa-facebook-official event-icon"></i>
+            </a>
+        </div>
+
+    </div>
+</div>
+-->
+                <div class="sidebar-container" id="recommended-posts-sidebar">
+    <div class="sidebar-title">
+        Dołącz do nas
+    </div>
+    <div class="sidebar-latest-posts-container">
+        <ul class="sidebar-posts">
+            <li class="sidebar-post no-breaking-word">
+                <a href="https://consdata.com/pl/kariera/dlaczego-consdata" target="_blank">
+                    Dlaczego Consdata?</a>
+            </li>
+            <li class="sidebar-post no-breaking-word">
+                <a href="https://consdata.com/pl/kariera/trwajace-rekrutacje" target="_blank">
+                    Trwające rekrutacje</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="post-post-section-mobile">
+            
+<div class="sidebar-container">
+    <div class="sidebar-title">
+        Najnowsze wpisy
+    </div>
+    <div class="sidebar-latest-posts-container">
+        <ul class="sidebar-posts"><li class="sidebar-post no-breaking-word">
+                <a href="/2021/08/20/stun-server.html" lang="pl">Czy wiesz, że WebRTC korzysta z serwera STUN, aby umożliwić połączenie P2P?</a>
+            </li><li class="sidebar-post no-breaking-word">
+                <a href="/2021/08/02/sredniki-w-js.html" lang="pl">Czy wiesz co się dzieje, kiedy nie stawiasz średników w JS?</a>
+            </li><li class="sidebar-post no-breaking-word">
+                <a href="/2021/07/16/zarzadzanie-dostepem-przy-uzyciu-access-control-list.html" lang="pl">Zarządzanie dostępem przy użyciu ACL (Access Control List)</a>
+            </li></ul>
+    </div>
+</div>
+
+        </div>
+        <div class="post-post-section-mobile">
+            <div class="sidebar-container" id="recommended-posts-bottombar">
+    <div class="sidebar-title">
+        Podobne wpisy
+    </div>
+    <div class="sidebar-latest-posts-container">
+        <ul class="sidebar-posts" id="recommended-posts-mobile">
+
+        </ul>
+    </div>
+</div>
+
+        </div>
+        <div class="post-post-section-mobile">
+            <!--            <div class="sidebar-container">
+    <div class="sidebar-title">
+        Ogłoszenia
+    </div>
+    <div class="ad-container">
+        <div class="ad-titile">
+            Dołącz do webinaru <br /> Consdata Tech #5
+        </div>
+        <div class="ad-red-text">
+            28.01.2021, czwartek, 18.00-19.30
+        </div>
+        <div class="ad-event-title">
+            Domain Driven Design <br /> w oparciu o Axon Framework
+        </div>
+        <div class="ad-icons-container">
+            <a class="ad-link-icon" href="https://www.meetup.com/pl-PL/Consdata/events/274821386/">
+                <i class="fa fa-meetup event-icon"></i>
+            </a>
+            <a class="ad-link-icon" href="https://www.facebook.com/events/140503697812590">
+                <i class="fa fa-facebook-official event-icon"></i>
+            </a>
+        </div>
+
+    </div>
+</div>
+-->
+        </div>
+        <div class="author-bio">
+    
+    <div class="author-image">
+        <a href="/authors/jgoszczurny.html" class="author-name">
+            <img src="/assets/img/authors/jgoszczurny.jpg" alt="author" width="120" height="120">
+        </a>
+    </div>
+    
+    <div class="card">
+        <div class="header">
+            
+            <a href="/authors/jgoszczurny.html" class="author-name">
+                Jakub Goszczurny
+            </a>
+            
+            <div class="social-buttons">
+                
+                <div class="author-github">
+                    <a href="https://github.com/szczurmys"
+                       title="szczurmys">
+                        <svg class="svg-icon grey">
+                            <use xlink:href="/assets/minima-social-icons.svg#github"></use>
+                        </svg>
+                        szczurmys</a>
+                </div>
+                
+            </div>
+        </div>
+        <div class="content">
+            
+                
+                    <div class="bio">Full-Stack Developer. Pasjonat programowania, który lubi poszerzać swoją wiedzę. Jego dewizą jest bycie otwartym na nowe rozwiązania, bo wszystko jest dla ludzi, jeśli tylko zostanie poprawnie wykorzystane. W ostatnim czasie jest skupiony na rozwijaniu swoich umiejętności DevOps, dzięki którym praca z projektem może być jeszcze przyjemniejsza.</div>
+                
+            
+        </div>
+    </div>
+</div>
+<div class="author-bio-mobile">
+    <div class="header">
+        
+        <div class="author-image">
+            <img src="/assets/img/authors/jgoszczurny.jpg">
+        </div>
+        
+        <div class="name-wrapper">
+            
+            <div class="author-name">Jakub Goszczurny</div>
+            
+            <div class="social-buttons">
+                
+                <div class="author-github">
+                    <a href="https://github.com/szczurmys"
+                       title="szczurmys">
+                        <svg class="svg-icon grey">
+                            <use xlink:href="/assets/minima-social-icons.svg#github"></use>
+                        </svg>
+                        szczurmys</a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        
+            
+            
+                <div class="bio">Full-Stack Developer. Pasjonat programowania, który lubi poszerzać swoją wiedzę. Jego dewizą jest bycie otwartym na nowe rozwiązania, bo wszystko jest dla ludzi, jeśli tylko zostanie poprawnie wykorzystane. W ostatnim czasie jest skupiony na rozwijaniu swoich umiejętności DevOps, dzięki którym praca z projektem może być jeszcze przyjemniejsza.</div>
+            
+        
+    </div>
+</div>
+<div id="disqus_thread"></div>
+<script>
+    function readCookie(name) {
+        const nameEQ = name + "=";
+        const ca = document.cookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
+    if (readCookie('cookie-notice-dismissed') === 'true') {
+        var disqus_config = function () {
+            this.page.url = 'https://chrrapek.github.io/2021/02/09/migracja-schematow-bazy-danych.html';
+            this.page.identifier = 'https://chrrapek.github.io/2021/02/09/migracja-schematow-bazy-danych.html';
+        };
+
+        (function () {
+            var d = document, s = d.createElement('script');
+
+            s.src = 'https://consdata-tech.disqus.com/embed.js';
+
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    }
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments
+    powered by Disqus.</a></noscript></article>
+</div>
+<script>
+    const language = 'pl';
+    const jsonPath = language === 'en' ? '/en/json/posts.json' : '/json/posts.json';
+    fetch(jsonPath)
+        .then(response => response.json())
+        .then(store => {
+            function displayResults(results) {
+                if (results.length > 0) {
+                    const container = document.getElementById("recommended-posts-desktop");
+                    const containerMobile = document.getElementById("recommended-posts-mobile");
+                    results
+                        .forEach(result => {
+                            const item = store[result.ref];
+                            if (item.lang === language) {
+                                const listElement = document.createElement('li');
+                                const anchor = document.createElement('a');
+                                const postTitle = document.createTextNode(item.title);
+                                listElement.classList.add('sidebar-post');
+                                listElement.classList.add('no-breaking-word');
+                                anchor.setAttribute('href', item.url);
+                                anchor.setAttribute('lang', 'pl');
+                                anchor.appendChild(postTitle);
+                                listElement.appendChild(anchor);
+                                container.appendChild(listElement);
+                                containerMobile.appendChild(listElement.cloneNode(true));
+                            }
+                        });
+                    if (container.children.length < 1) {
+                        hideRecommendedPosts();
+                    }
+                } else {
+                    hideRecommendedPosts();
+                }
+
+            }
+
+            const tags = "migration database liquibase flyway kubernetes job initContainers";
+            const idx = lunr(function () {
+                this.field('tags');
+
+                for (let key in store) {
+                    this.add({
+                        'id': key,
+                        'title': store[key].title,
+                        'tags': store[key].tags,
+                    });
+                }
+            });
+            const results = idx.search(tags).slice(1, 4);
+            displayResults(results);
+        })
+
+    function zoomImage($event) {
+        const modal = document.getElementById('myModal');
+        modal.getElementsByTagName('img')[0].src = $event.target.src;
+        modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+    }
+
+    function hideRecommendedPosts() {
+        document.getElementById("recommended-posts-sidebar").style.display = 'none';
+        document.getElementById("recommended-posts-bottombar").style.display = 'none';
+    }
+
+    const postImages = document.querySelectorAll('.post-content img');
+    postImages.forEach(x => x.addEventListener('click', zoomImage));
+</script>
+
+</main><footer>
+    <div class="container">
+        <div class="footer-item company">
+            <div class="label">
+                <img src="/assets/img/logo.png"/>
+            </div>
+            <div class="item-content">
+                <p>
+                    K9OFFICE, UL. KRYSIEWICZA 9/17<br/>
+                    61-825 POZNAŃ<br/>
+                    POLSKA
+                </p>
+                <p>
+                    TEL.:+48 61 41 51 000
+                </p>
+                <p>
+                    NIP: 1822261960<br/>
+                    REGON: 634422180
+                </p>
+            </div>
+        </div>
+        <div class="footer-item legals">
+            <div class="label">
+                INFORMACJE
+            </div>
+            <div class="item-content">
+                <p>
+                    <a href="https://consdata.com/pl/polityka-prywatnosci" target="_blank">POLITYKA PRYWATNOŚCI </a>
+                </p>
+            </div>
+        </div>
+        <div class="footer-item social-buttons">
+            <div class="label">
+                POZOSTAŃ W KONTAKCIE
+            </div>
+            <div class="item-content">
+                <div class="social-buttons-container">
+                    <div class="social-button-wrapper">
+                        <a class="social-btn" target="_blank" href="https://www.facebook.com/consdatacom"
+                           title="Facebook">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </div>
+                    <div class="social-button-wrapper">
+                        <a class="social-btn" target="_blank"
+                           href="https://www.youtube.com/channel/UCv4d_uCiLdDkOFk8NtDsU_w" title="Youtube">
+                            <i class="fa fa-youtube"></i>
+                        </a>
+                    </div>
+                    <div class="social-button-wrapper">
+                        <a class="social-btn" target="_blank" href="https://www.linkedin.com/company/1456906"
+                           title="Linkedin">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        Copyrights © 2021 CONSDATA
+    </div>
+</footer>
+<div class="cookie-notice" id="cookie-notice">
+    <span>
+        
+        Chcemy używać plików cookie oraz skryptów podmiotów trzecich do polepszania funkcjonowania tej strony
+    </span>
+    <a id="cookie-notice-accept" class="consent-button">Zgadzam się</a>
+    <i onclick="hideConsent()" class="close-consent fa fa-times close"></i>
+</div>
+
+<script>
+    function createCookie(name, value, days) {
+        let expires = "";
+        if (days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+
+    function readCookie(name) {
+        const nameEQ = name + "=";
+        const ca = document.cookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
+    function eraseCookie(name) {
+        createCookie(name, "", -1);
+    }
+
+    function hideConsent() {
+        document.getElementById('cookie-notice').style.display = 'none';
+    }
+
+    document.getElementById('cookie-notice-accept').addEventListener("click", function () {
+        createCookie('cookie-notice-dismissed', 'true', 31);
+        hideConsent();
+        location.reload();
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" >
+  <generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator>
+  <link href="https://chrrapek.github.io/en/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="https://chrrapek.github.io/en/" rel="alternate" type="text/html" />
+  <updated>2021-08-26T02:57:47-05:00</updated>
+  <id>https://chrrapek.github.io/feed.xml</id>
+
+  
+  
+  
+
+  
+    <title type="html">Consdata - blog techniczny | </title>
+  
+
+  
+
+  
+
+  
+  
+  
+    <entry xml:lang="pl">
+      <title type="html">Czy wiesz, że WebRTC korzysta z serwera STUN, aby umożliwić połączenie P2P?</title>
+      <link href="https://chrrapek.github.io/en/2021/08/20/stun-server.html" rel="alternate" type="text/html" title="Czy wiesz, że WebRTC korzysta z serwera STUN, aby umożliwić połączenie P2P?" />
+      <published>2021-08-20T00:00:00-05:00</published>
+      <updated>2021-08-20T00:00:00-05:00</updated>
+      <id>https://chrrapek.github.io/2021/08/20/stun-server</id>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Jakub Goszczurny</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="webrtc" />
+      
+        <category term="stun" />
+      
+        <category term="p2p" />
+      
+
+      
+        <summary type="html">Czy wiesz że WebRTC korzysta z serwera STUN, aby umożliwić połączenie P2P, a w ostateczności z serwera TURN aby przepuścić ruch przez niego i umożliwić połączenie?</summary>
+      
+
+      
+      
+        
+        <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://chrrapek.github.io/assets/img/posts/2021-08-20-stun-server/handshake.webp" />
+      
+    </entry>
+  
+    <entry xml:lang="pl">
+      <title type="html">Czy wiesz co się dzieje, kiedy nie stawiasz średników w JS?</title>
+      <link href="https://chrrapek.github.io/en/2021/08/02/sredniki-w-js.html" rel="alternate" type="text/html" title="Czy wiesz co się dzieje, kiedy nie stawiasz średników w JS?" />
+      <published>2021-08-02T02:00:00-05:00</published>
+      <updated>2021-08-02T02:00:00-05:00</updated>
+      <id>https://chrrapek.github.io/2021/08/02/sredniki-w-js</id>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Piotr Grobelny</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="javascript" />
+      
+
+      
+        <summary type="html">Każdemu zdarza się czasem zapomnieć postawić średnika na końcu linijki. Powinny to wyłapywać reguły zawarte w narzędziach takich jak TSLint, ESList, lecz czasami mimo ich pomocy zapominamy o tym. I co wtedy? Niby nic się nie dzieje, a kod dalej działa według naszej myśli, tylko dlaczego z jakiegoś powodu wszyscy każą stawiać te średniki?</summary>
+      
+
+      
+      
+        
+        <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://chrrapek.github.io/assets/img/posts/2021-08-02-sredniki-w-js/semicolon.jpg" />
+      
+    </entry>
+  
+    <entry xml:lang="pl">
+      <title type="html">Zarządzanie dostępem przy użyciu ACL (Access Control List)</title>
+      <link href="https://chrrapek.github.io/en/2021/07/16/zarzadzanie-dostepem-przy-uzyciu-access-control-list.html" rel="alternate" type="text/html" title="Zarządzanie dostępem przy użyciu ACL (Access Control List)" />
+      <published>2021-07-16T02:00:00-05:00</published>
+      <updated>2021-07-16T02:00:00-05:00</updated>
+      <id>https://chrrapek.github.io/2021/07/16/zarzadzanie-dostepem-przy-uzyciu-access-control-list</id>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Paweł Walaszek</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="acl" />
+      
+        <category term="access control list" />
+      
+        <category term="spring security" />
+      
+        <category term="acl access control list" />
+      
+        <category term="authorization" />
+      
+
+      
+        <summary type="html">W świecie programistów Java, od wielu lat prym wiedzie Spring Framework, który błyskawicznie dostosowuje się do panujących trendów. Trudno sobie wyobrazić programistę Java, szczególnie aplikacji internetowych, który nie znałby tego projektu, lub precyzyjniej, zbioru projektów. Jednym z popularnych i bardzo dojrzałych elementów ekosystemu, jest Spring Security, który dostarcza gotowe rozwiązania dla różnych zawiłych zagadnień w zakresie bezpieczeństwa.</summary>
+      
+
+      
+      
+        
+        <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://chrrapek.github.io/assets/img/posts/2021-07-16-zarzadzanie-dostepem-przy-uzyciu-access-control-list/acl.png" />
+      
+    </entry>
+  
+    <entry xml:lang="pl">
+      <title type="html">Metaprogramowanie w Javie - @Target</title>
+      <link href="https://chrrapek.github.io/en/2021/07/08/metaprogramowanie-w-javie.html" rel="alternate" type="text/html" title="Metaprogramowanie w Javie - @Target" />
+      <published>2021-07-08T02:00:00-05:00</published>
+      <updated>2021-07-08T02:00:00-05:00</updated>
+      <id>https://chrrapek.github.io/2021/07/08/metaprogramowanie-w-javie</id>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Dominik Surdyk</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="java" />
+      
+
+      
+        <summary type="html">W tym artykule dowiemy się jak używać adnotacji @Target przy tworzeniu własnej adnotacji.</summary>
+      
+
+      
+      
+        
+        <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://chrrapek.github.io/assets/img/posts/2021-07-06-metaprogramowanie-w-javie/metaprogramowanie.webp" />
+      
+    </entry>
+  
+    <entry xml:lang="pl">
+      <title type="html">Volatile nie należy się bać</title>
+      <link href="https://chrrapek.github.io/en/2021/05/31/slowo-kluczowe-volatile.html" rel="alternate" type="text/html" title="Volatile nie należy się bać" />
+      <published>2021-05-31T04:00:00-05:00</published>
+      <updated>2021-05-31T04:00:00-05:00</updated>
+      <id>https://chrrapek.github.io/2021/05/31/slowo-kluczowe-volatile</id>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Marcin Mergo</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="java" />
+      
+
+      
+        <summary type="html">Słowo kluczowe volatile wydaje się jednym z najrzadziej stosowanych, ale też najbardziej tajemniczych i najsłabiej poznanych słów kluczowych w Javie. Do czego więc służy, i czy jest się czego bać?</summary>
+      
+
+      
+      
+        
+        <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://chrrapek.github.io/assets/img/posts/2021-05-31-slowo-kluczowe-volatile/volatile.webp" />
+      
+    </entry>
+  
+    <entry xml:lang="pl">
+      <title type="html">Java darmowa, czy nie? - aktualizacja</title>
+      <link href="https://chrrapek.github.io/en/2021/04/30/java-darmowa-czy-nie-update.html" rel="alternate" type="text/html" title="Java darmowa, czy nie? - aktualizacja" />
+      <published>2021-04-30T04:00:00-05:00</published>
+      <updated>2021-04-30T04:00:00-05:00</updated>
+      <id>https://chrrapek.github.io/2021/04/30/java-darmowa-czy-nie-update</id>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Jakub Wilczewski</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="java" />
+      
+
+      
+        <summary type="html">Microsoft dołącza do dystrybutorów JDK. To dobry moment żeby sprawdzić, jak rozwinęła się sytuacja z wydawaniem darmowych dystrybucji od czasu, kiedy Oracle zmienił tryb licencjonowania. Pisaliśmy o tym dwa lata temu w artykule Java darmowa, czy nie?</summary>
+      
+
+      
+      
+        
+        <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://chrrapek.github.io/assets/img/posts/2021-04-25-java-darmowa-czy-nie-update/java-darmowa.png" />
+      
+    </entry>
+  
+    <entry xml:lang="pl">
+      <title type="html">Micro frontends: czy współdzielić zależności?</title>
+      <link href="https://chrrapek.github.io/en/2021/04/16/webpack-externals-vs-bundled.html" rel="alternate" type="text/html" title="Micro frontends: czy współdzielić zależności?" />
+      <published>2021-04-16T02:00:00-05:00</published>
+      <updated>2021-04-16T02:00:00-05:00</updated>
+      <id>https://chrrapek.github.io/2021/04/16/webpack-externals-vs-bundled</id>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Grzegorz Lipecki</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="frontend" />
+      
+        <category term="angular" />
+      
+        <category term="webpack" />
+      
+        <category term="micro-frontends" />
+      
+
+      
+        <summary type="html">tl;dr To współdzielić zależności czy nie? Nie zawsze! Jeżeli nie natrafiłeś na problemy z rozmiarem bundli, to nie rozwiązuj teoretycznych problemów. Zanim zabierzesz się za optymalizację - oceń, co jest problemem, określ, co chcesz osiągnąć i zastanów się, jakimi krokami możesz tam dotrzeć. Bieżące narzędzia stosują zaawansowane mechanizmy optymalizacji, które mogą zachwiać Twoje intuicyjne rozumienie problemu ;-)</summary>
+      
+
+      
+      
+        
+        <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://chrrapek.github.io/assets/img/posts/2021-04-16-webpack-externals-vs-bundled/scale.webp" />
+      
+    </entry>
+  
+    <entry xml:lang="pl">
+      <title type="html">Współdzielona biblioteka w Jenkins pipeline</title>
+      <link href="https://chrrapek.github.io/en/2021/04/14/wspoldzielona-biblioteka-w-jenkins-pipeline.html" rel="alternate" type="text/html" title="Współdzielona biblioteka w Jenkins pipeline" />
+      <published>2021-04-14T02:00:00-05:00</published>
+      <updated>2021-04-14T02:00:00-05:00</updated>
+      <id>https://chrrapek.github.io/2021/04/14/wspoldzielona-biblioteka-w-jenkins-pipeline</id>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Dawid Kubiak</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="jenkins" />
+      
+        <category term="devops" />
+      
+        <category term="pipeline" />
+      
+        <category term="shared library" />
+      
+
+      
+        <summary type="html">W tym artykule zapoznamy się z mechanizmem bibliotek współdzielonych (Pipeline: Shared Groovy Libraries), które stanowią zależność do szeroko stosowanej wtyczki jenkinsowej pipelines (https://www.jenkins.io/doc/book/pipeline/).</summary>
+      
+
+      
+      
+        
+        <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://chrrapek.github.io/assets/img/posts/2021-04-14-wspoldzielona-biblioteka-w-jenkins-pipeline/jenkins-shard-pipeline.webp" />
+      
+    </entry>
+  
+    <entry xml:lang="pl">
+      <title type="html">Standard HTTP i REST - dobre i złe praktyki</title>
+      <link href="https://chrrapek.github.io/en/2021/03/31/rest-api-dobre-praktyki.html" rel="alternate" type="text/html" title="Standard HTTP i REST - dobre i złe praktyki" />
+      <published>2021-03-31T02:00:00-05:00</published>
+      <updated>2021-03-31T02:00:00-05:00</updated>
+      <id>https://chrrapek.github.io/2021/03/31/rest-api-dobre-praktyki</id>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Barbara Mitan</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="http" />
+      
+        <category term="rest" />
+      
+        <category term="rest api" />
+      
+
+      
+        <summary type="html">HTTP i REST - czy zawsze dobrze je stosujemy? Jakie są częste błędy przy doborze metod HTTP? Kiedy trzymać się standardu, a kiedy może to być problemem? O czym pamiętać projektując swoje REST API? Choć ani standard HTTP, ani REST nie są nowością w świecie IT, to pewne twierdzenia ich dotyczące są błędnie powielane przez wiele osób. Czasem znów okazuje się, że deweloperzy pracujący dla różnych firm podchodzą do tego samego problemu w inny sposób. Zapraszam na podróż w znane, ale wciąż jeszcze nie zawsze przestrzegane, standardy HTTP i REST.</summary>
+      
+
+      
+      
+        
+        <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://chrrapek.github.io/assets/img/posts/2021-03-31-rest-api-dobre-praktyki/RESTApi.webp" />
+      
+    </entry>
+  
+    <entry xml:lang="pl">
+      <title type="html">Migracja aplikacji do chmury Google Cloud Platform w praktyce</title>
+      <link href="https://chrrapek.github.io/en/2021/03/03/przyklad-migracji-do-chmury.html" rel="alternate" type="text/html" title="Migracja aplikacji do chmury Google Cloud Platform w praktyce" />
+      <published>2021-03-03T01:00:00-06:00</published>
+      <updated>2021-03-03T01:00:00-06:00</updated>
+      <id>https://chrrapek.github.io/2021/03/03/przyklad-migracji-do-chmury</id>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Michał Hoja</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="cloud" />
+      
+        <category term="serverless" />
+      
+        <category term="gcp" />
+      
+        <category term="googlecloud" />
+      
+        <category term="cloud migration" />
+      
+        <category term="google cloud platform" />
+      
+
+      
+        <summary type="html">W poprzednim wpisie pt. “Migracja do chmury - czyli od czego zacząć?” przedstawiłem etapy procesu migracji aplikacji do chmury, a także opisałem poszczególne strategie migracji.</summary>
+      
+
+      
+      
+        
+        <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://chrrapek.github.io/assets/img/posts/2021-03-03-przyklad-migracji-do-chmury/clouds.webp" />
+      
+    </entry>
+  
+</feed>
